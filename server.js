@@ -26,12 +26,29 @@ app.get("/team/:id", async (req, res) => {
     global_rank.indexOf("with") + 5,
     global_rank.indexOf("pts") - 1
   );
-  
+
   var country_rank = $("p:contains('Country place:')")
     .text()
     .replace(/\s+/g, " ")
     .trim();
-  data.country_rank = country_rank.substring()
+  data.country_rank = country_rank.substring(country_rank.indexOf(":") + 2);
+  data.country = $("p:contains('Country place:')")
+    .find("a")
+    .attr("href")
+    .substring(
+      $("p:contains('Country place:')")
+        .find("a")
+        .attr("href")
+        .indexOf("/stats/") + 7
+    );
+  data.competitions = [];
+  var competitions = $(".table-striped")[0];
+  var compHeaders = competitions.children("tr")[0]
+  for (var i = 1;i<competitions.children("tr").length;i++) {
+    var event = {}
+    const row = competitions.children("tr")[i];
+  }
+
   res.setHeader("Content-Type", "application/json");
   res.send(JSON.stringify(data, null, 4));
 });
