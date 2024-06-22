@@ -1,10 +1,18 @@
 const express = require('express');
+const fetch = require('node-fetch');
+const cheerio = require('cheerio');
 
 const app = express();
 
 
-app.get('/team/:name', (req, res) => {
-  res.send(`Name: ${req.params.name}`);
+app.get('/team/:id', async (req, res) => {
+  const id = req.params.id;
+  const url = 'https://ctftime.org/team/'+id;
+  const response = await fetch(url);
+  const body = await response.text();
+  const $ = cheerio.load(body);
+  console.log($('.tab-content')[0])
+  res.send("done!")
 });
 app.get('/', (req, res) => {
   res.sendFile(__dirname + "/index.html")
