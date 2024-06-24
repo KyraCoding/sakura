@@ -6,6 +6,7 @@ const swaggerJsdoc = require("swagger-jsdoc");
 const swaggerUi = require("swagger-ui-express");
 const app = express();
 
+
 app.get("/api/team/:id", async (req, res) => {
   const id = req.params.id;
   const url = "https://ctftime.org/team/" + id;
@@ -110,7 +111,12 @@ app.get("/api/team/:id", async (req, res) => {
 app.get("/", (req, res) => {
   res.sendFile(__dirname + "/home.html");
 });
-
+app.get("/team", (req, res) => {
+  res.sendFile(__dirname + "/team.html");
+});
+app.get("/team/:id", (req, res) => {
+  res.sendFile(__dirname + "/team.html");
+});
 const options = {
   definition: {
     openapi: "3.1.0",
