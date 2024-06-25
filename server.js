@@ -117,6 +117,12 @@ app.get("/team", (req, res) => {
 app.get("/team/:id", (req, res) => {
   res.sendFile(__dirname + "/team.html");
 });
+app.get("/user", (req, res) => {
+  res.sendFile(__dirname + "/user.html");
+});
+app.get("/user/:id", (req, res) => {
+  res.sendFile(__dirname + "/user.html");
+});
 const options = {
   definition: {
     openapi: "3.1.0",

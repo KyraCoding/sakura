@@ -213,6 +213,29 @@
               id="id_input"
             />
           </div>
+          <script>
+              const form = document.getElementById("id_input");
+              form.addEventListener("keydown", function (event) {
+                if (event.key === "Enter") {
+                  event.preventDefault();
+                  window.location.href = `/${
+                    document.getElementById("select_id_type").value
+                  }/${form.value}`;
+                }
+              });
+              form.onkeydown = function (e) {
+                if (48 > e.which || e.which > 57)
+                  if (e.key.length === 1) e.preventDefault();
+              };
+              // Form logic
+              document.getElementById("select_id_type").onchange = function () {
+                document.getElementById(
+                  "id_input"
+                ).placeholder = `Enter a CTFtime ${document
+                  .getElementById("select_id_type")
+                  .value.toLowerCase()} id...`;
+              };
+            </script>
           <!-- Clock -->
           <div class="flex w-3/12 border-b border-l bg-white items-center">
             <p id="clock" class="text-center w-full">
@@ -440,14 +463,6 @@
       </div>
     </div>
     <script>
-      // Form logic
-      document.getElementById("select_id_type").onchange = function () {
-        document.getElementById(
-          "id_input"
-        ).placeholder = `Enter a CTFtime ${document
-          .getElementById("select_id_type")
-          .value.toLowerCase()} id...`;
-      };
     </script>
   </body>
 </html>
