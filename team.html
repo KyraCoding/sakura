@@ -213,14 +213,27 @@
             />
 
             <script>
-              document
-                .getElementById("id_input")
-                .addEventListener("keydown", function (event) {
-                  if (event.key === "Enter") {
-                    event.preventDefault();
-                    console.log("Enter key pressed!");
-                  }
-                });
+              const form = document.getElementById("id_input");
+              form.addEventListener("keydown", function (event) {
+                if (event.key === "Enter") {
+                  event.preventDefault();
+                  window.location.href = `/${
+                    document.getElementById("select_id_type").value
+                  }/${form.value}`;
+                }
+              });
+              form.onkeydown = function (e) {
+                if (48 > e.which || e.which > 57)
+                  if (e.key.length === 1) e.preventDefault();
+              };
+              // Form logic
+              document.getElementById("select_id_type").onchange = function () {
+                document.getElementById(
+                  "id_input"
+                ).placeholder = `Enter a CTFtime ${document
+                  .getElementById("select_id_type")
+                  .value.toLowerCase()} id...`;
+              };
             </script>
           </div>
           <!-- Clock -->
@@ -306,7 +319,7 @@
             </div>
             <div class="flex w-full align-middle justify-center items-center">
               <p class="text-center font-semibold text-1xl text-slate-800">
-                Search for a CTFteam above by id!
+                Search for a CTFtime team above by id!
               </p>
             </div>
           </div>
