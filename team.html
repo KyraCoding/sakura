@@ -211,6 +211,17 @@
               placeholder="Enter a CTFtime team id..."
               id="id_input"
             />
+
+            <script>
+              document
+                .getElementById("id_input")
+                .addEventListener("keydown", function (event) {
+                  if (event.key === "Enter") {
+                    event.preventDefault();
+                    console.log("Enter key pressed!");
+                  }
+                });
+            </script>
           </div>
           <!-- Clock -->
           <div class="flex w-3/12 border-b border-l bg-white items-center">
@@ -281,8 +292,25 @@
         </div>
         <!-- Main body -->
         <div
-          class="flex flex-grow flex-col p-3 bg-[url('https://cdn.glitch.global/f94b91c0-57aa-472c-8482-669e878fb266/Simple%20Shiny.svg?v=1719203543517')] bg-cover bg-center"
-        ></div>
+          class="flex h-full w-full p-3 justify-center items-center bg-[url('https://cdn.glitch.global/f94b91c0-57aa-472c-8482-669e878fb266/Simple%20Shiny.svg?v=1719203543517')] bg-cover bg-center"
+        >
+          <div
+            class="flex flex-col w-fit h-fit bg-slate-800/25 rounded justify-center p-6"
+          >
+            <div class="flex w-full h-1/2 items-center">
+              <div class="flex w-full align-middle justify-center">
+                <h1 class="text-center font-semibold text-2xl text-slate-800">
+                  No team selected...
+                </h1>
+              </div>
+            </div>
+            <div class="flex w-full align-middle justify-center items-center">
+              <p class="text-center font-semibold text-1xl text-slate-800">
+                Search for a CTFteam above by id!
+              </p>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </body>
