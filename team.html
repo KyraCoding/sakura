@@ -5,6 +5,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -307,8 +308,83 @@
         <div
           class="flex h-full w-full p-3 justify-center items-center bg-[url('https://cdn.glitch.global/f94b91c0-57aa-472c-8482-669e878fb266/Simple%20Shiny.svg?v=1719203543517')] bg-cover bg-center"
         >
+          <!-- Loading, default -->
           <div
             class="flex flex-col w-fit h-fit bg-slate-800/25 rounded justify-center p-6"
+            id="loading_id"
+          >
+            <div class="flex w-full h-full items-center">
+              <div class="flex w-full align-middle justify-center">
+                <h1
+                  class="text-center font-semibold text-3xl text-slate-800"
+                  
+                >
+                  sakura{<span id="loading_text"></span>}
+                </h1>
+
+                <script>
+                  var text = [
+                      "loading...",
+                      "bG9hZGluZy4uLg==",
+                      "6c6f6164696e672e2e2e",
+                      "...gnidaol",
+                      "13d494fd35f9f5b14309b84466cbddf2",
+                      "108 111 97 100 105 110 103 46 46 46",
+                      "NRXWCZDJNZTS4LRO"
+                    ]
+                  var typed = new Typed("#loading_text", {
+                    strings: text,
+                    typeSpeed: 50,
+                    shuffle: false,
+                    showCursor: false,
+                    loop: true,
+                    backSpeed: 25,
+                    loopCount: Infinity,
+                  });
+                </script>
+              </div>
+            </div>
+          </div>
+          <!-- No id provided -->
+          <div
+            class="flex flex-col w-fit h-fit bg-slate-800/25 rounded justify-center p-6 hidden"
+            id="no_id"
+          >
+            <div class="flex w-full h-1/2 items-center">
+              <div class="flex w-full align-middle justify-center">
+                <h1 class="text-center font-semibold text-2xl text-slate-800">
+                  No team selected...
+                </h1>
+              </div>
+            </div>
+            <div class="flex w-full align-middle justify-center items-center">
+              <p class="text-center font-semibold text-1xl text-slate-800">
+                Search for a CTFtime team above by id!
+              </p>
+            </div>
+          </div>
+          <!-- Invalid id  -->
+          <div
+            class="flex flex-col w-fit h-fit bg-slate-800/25 rounded justify-center p-6 hidden"
+            id="invalid_id"
+          >
+            <div class="flex w-full h-1/2 items-center">
+              <div class="flex w-full align-middle justify-center">
+                <h1 class="text-center font-semibold text-2xl text-slate-800">
+                  No team selected...
+                </h1>
+              </div>
+            </div>
+            <div class="flex w-full align-middle justify-center items-center">
+              <p class="text-center font-semibold text-1xl text-slate-800">
+                Search for a CTFtime team above by id!
+              </p>
+            </div>
+          </div>
+          <!-- Valid id -->
+          <div
+            class="flex flex-col w-fit h-fit bg-slate-800/25 rounded justify-center p-6 hidden"
+            id="valid_id"
           >
             <div class="flex w-full h-1/2 items-center">
               <div class="flex w-full align-middle justify-center">
