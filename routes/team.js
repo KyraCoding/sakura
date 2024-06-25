@@ -5,6 +5,9 @@
  *     Team:
  *       type: object
  *       properties:
+ *         failed:
+ *           type: boolean
+ *           description: Whether the request failed or not (should be false) 
  *         id:
  *           type: integer
  *           description: The CTFtime id of the team
@@ -107,5 +110,7 @@
  *               $ref: '#/components/schemas/Team'
  *       404:
  *         description: The team's id was not found
+ *       500:
+ *         description: Internal server error, likely CTFtime servers
  *
  */
