@@ -211,7 +211,7 @@
               type="number"
               placeholder="Enter a CTFtime team id..."
               id="id_input"
-                value=""
+              value=""
             />
 
             <script>
@@ -407,58 +407,61 @@
             </div>
           </div>
           <!-- Valid id -->
-          <div
-            class="flex flex-col w-fit h-fit bg-slate-800/25 rounded justify-center p-6 hidden"
-            id="valid_id"
-          >
-            <div class="flex w-full h-1/2 items-center">
-              <div class="flex w-full align-middle justify-center">
-                <h1 class="text-center font-semibold text-2xl text-slate-800">
-                  Team found!
-                </h1>
+          <div class="flex flex-col w-full h-full hidden" id="valid_id">
+            <!-- Names and stuff -->
+            <div
+              class="flex flex-col w-1/2 h-1/2 bg-slate-800/25 rounded place-self-start m-3 p-6"
+            >
+              <!-- Pfp, name and country -->
+              <div class="w-full flex flex-row h-24">
+                <!-- Pfp -->
+                <img
+                  id="team_pfp"
+                  class="w- mr-3"
+                  src="https://cdn.glitch.global/f94b91c0-57aa-472c-8482-669e878fb266/Meteor.svg?v=1719339963690"
+                />
+
+                <div class="flex flex-grow flex-col">
+                  <!-- Team name -->
+                  <h1
+                    id="team_name"
+                    class="font-semibold text-3xl text-slate-800 h-1/2 w-full"
+                  >
+                    [Name goes here]
+                  </h1>
+                </div>
               </div>
-            </div>
-            <div class="flex w-full align-middle justify-center items-center">
-              <p class="text-center font-semibold text-1xl text-slate-800">
-                Now loading data...
-              </p>
             </div>
           </div>
         </div>
       </div>
     </div>
     <script>
-      document.getElementById("id_input").value = window.location.href.substring(31);
+      document.getElementById("id_input").value =
+        window.location.href.substring(31);
       if (!window.location.href.substring(31)) {
-              document.getElementById("loading_id").classList.add("hidden");
-              document.getElementById("no_id").classList.remove("hidden");
-            } else {
-              
-              async function getData() {
-                const response = await fetch(
-                  "/api/team/" + window.location.href.substring(31)
-                );
-                if (response.status == 404) {
-                  document.getElementById("loading_id").classList.add("hidden");
-                  document
-                    .getElementById("invalid_id")
-                    .classList.remove("hidden");
-                } else if (response.status == 200) {
-                  const data = await response.json();
-                  console.log(data);
-                  document.getElementById("loading_id").classList.add("hidden");
-                  document
-                    .getElementById("valid_id")
-                    .classList.remove("hidden");
-                } else {
-                  document.getElementById("loading_id").classList.add("hidden");
-                  document
-                    .getElementById("error_id")
-                    .classList.remove("hidden");
-                }
-              }
-              getData();
-            }
+        document.getElementById("loading_id").classList.add("hidden");
+        document.getElementById("no_id").classList.remove("hidden");
+      } else {
+        async function getData() {
+          const response = await fetch(
+            "/api/team/" + window.location.href.substring(31)
+          );
+          if (response.status == 404) {
+            document.getElementById("loading_id").classList.add("hidden");
+            document.getElementById("invalid_id").classList.remove("hidden");
+          } else if (response.status == 200) {
+            const data = await response.json();
+            console.log(data);
+            document.getElementById("loading_id").classList.add("hidden");
+            document.getElementById("valid_id").classList.remove("hidden");
+          } else {
+            document.getElementById("loading_id").classList.add("hidden");
+            document.getElementById("error_id").classList.remove("hidden");
+          }
+        }
+        getData();
+      }
     </script>
   </body>
 </html>
