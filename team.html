@@ -211,6 +211,7 @@
               type="number"
               placeholder="Enter a CTFtime team id..."
               id="id_input"
+                value=""
             />
 
             <script>
@@ -246,8 +247,8 @@
               /// Utility functions
               function ordinal(num) {
                 num = num.toString();
-                num = num.charAt(num.length-1);
-                
+                num = num.charAt(num.length - 1);
+
                 if (num == "1") {
                   return "st";
                 } else if (num == "2") {
@@ -259,10 +260,10 @@
                 }
               }
               function correctHour(num) {
-                if (!(num%12)) {
+                if (!(num % 12)) {
                   return 12;
                 } else {
-                  return num%12;
+                  return num % 12;
                 }
               }
               function isAM(num) {
@@ -300,11 +301,11 @@
 
                 clock.innerHTML = `${
                   months[date.getMonth()]
-                } ${date.getDate()}${ordinal(
-                  date.getDate()
-                )}, ${correctHour(date.getHours())}:${padNumber(
-                  date.getMinutes()
-                )}:${padNumber(date.getSeconds())}${isAM(date.getHours())}`;
+                } ${date.getDate()}${ordinal(date.getDate())}, ${correctHour(
+                  date.getHours()
+                )}:${padNumber(date.getMinutes())}:${padNumber(
+                  date.getSeconds()
+                )}${isAM(date.getHours())}`;
               }
 
               // Clock
@@ -324,23 +325,20 @@
           >
             <div class="flex w-full h-full items-center">
               <div class="flex w-full align-middle justify-center">
-                <h1
-                  class="text-center font-semibold text-3xl text-slate-800"
-                  
-                >
+                <h1 class="text-center font-semibold text-3xl text-slate-800">
                   sakura{<span id="loading_text"></span>}
                 </h1>
 
                 <script>
                   var text = [
-                      "loading...",
-                      "bG9hZGluZy4uLg==",
-                      "6c6f6164696e672e2e2e",
-                      "...gnidaol",
-                      "13d494fd35f9f5b14309b84466cbddf2",
-                      "108 111 97 100 105 110 103 46 46 46",
-                      "NRXWCZDJNZTS4LRO"
-                    ]
+                    "loading...",
+                    "bG9hZGluZy4uLg==",
+                    "6c6f6164696e672e2e2e",
+                    "...gnidaol",
+                    "13d494fd35f9f5b14309b84466cbddf2",
+                    "108 111 97 100 105 110 103 46 46 46",
+                    "NRXWCZDJNZTS4LRO",
+                  ];
                   var typed = new Typed("#loading_text", {
                     strings: text,
                     typeSpeed: 50,
@@ -380,13 +378,31 @@
             <div class="flex w-full h-1/2 items-center">
               <div class="flex w-full align-middle justify-center">
                 <h1 class="text-center font-semibold text-2xl text-slate-800">
-                  No team selected...
+                  Team not found...
                 </h1>
               </div>
             </div>
             <div class="flex w-full align-middle justify-center items-center">
               <p class="text-center font-semibold text-1xl text-slate-800">
-                Search for a CTFtime team above by id!
+                Are you sure you entered the id correctly?
+              </p>
+            </div>
+          </div>
+          <!-- Server error -->
+          <div
+            class="flex flex-col w-fit h-fit bg-slate-800/25 rounded justify-center p-6 hidden"
+            id="error_id"
+          >
+            <div class="flex w-full h-1/2 items-center">
+              <div class="flex w-full align-middle justify-center">
+                <h1 class="text-center font-semibold text-2xl text-slate-800">
+                  Uh oh!
+                </h1>
+              </div>
+            </div>
+            <div class="flex w-full align-middle justify-center items-center">
+              <p class="text-center font-semibold text-1xl text-slate-800">
+                Our server ran into an error, try again later.
               </p>
             </div>
           </div>
@@ -398,18 +414,51 @@
             <div class="flex w-full h-1/2 items-center">
               <div class="flex w-full align-middle justify-center">
                 <h1 class="text-center font-semibold text-2xl text-slate-800">
-                  No team selected...
+                  Team found!
                 </h1>
               </div>
             </div>
             <div class="flex w-full align-middle justify-center items-center">
               <p class="text-center font-semibold text-1xl text-slate-800">
-                Search for a CTFtime team above by id!
+                Now loading data...
               </p>
             </div>
           </div>
         </div>
       </div>
     </div>
+    <script>
+      document.getElementById("id_input").value = window.location.href.substring(31);
+      if (!window.location.href.substring(31)) {
+              document.getElementById("loading_id").classList.add("hidden");
+              document.getElementById("no_id").classList.remove("hidden");
+            } else {
+              
+              async function getData() {
+                const response = await fetch(
+                  "/api/team/" + window.location.href.substring(31)
+                );
+                if (response.status == 404) {
+                  document.getElementById("loading_id").classList.add("hidden");
+                  document
+                    .getElementById("invalid_id")
+                    .classList.remove("hidden");
+                } else if (response.status == 200) {
+                  const data = await response.json();
+                  console.log(data);
+                  document.getElementById("loading_id").classList.add("hidden");
+                  document
+                    .getElementById("valid_id")
+                    .classList.remove("hidden");
+                } else {
+                  document.getElementById("loading_id").classList.add("hidden");
+                  document
+                    .getElementById("error_id")
+                    .classList.remove("hidden");
+                }
+              }
+              getData();
+            }
+    </script>
   </body>
 </html>
