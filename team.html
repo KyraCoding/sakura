@@ -6,12 +6,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
+    <script src="https://cdn.tailwindcss.com?plugins=aspect-ratio"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap"
       rel="stylesheet"
     />
+    <link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.2.3/css/flag-icons.min.css"
+/>
     <script>
       tailwind.config = {
         theme: {
@@ -407,29 +412,40 @@
             </div>
           </div>
           <!-- Valid id -->
-          <div class="flex flex-col w-full h-full hidden" id="valid_id">
+          <div class="flex flex-row w-full h-full hidden gap-3" id="valid_id">
             <!-- Names and stuff -->
+            <div class="flex flex-col w-1/2 h-full gap-3">
             <div
-              class="flex flex-col w-1/2 h-1/2 bg-slate-800/25 rounded place-self-start m-3 p-6"
+              class="flex flex-col w-full h-1/2 bg-slate-800/25 rounded p-6"
             >
               <!-- Pfp, name and country -->
-              <div class="w-full flex flex-row h-24">
+              <div class=" flex flex-row h-1/2 gap-3">
                 <!-- Pfp -->
                 <img
                   id="team_pfp"
-                  class="w- mr-3"
+                  class="h-full aspect-square	"
                   src="https://cdn.glitch.global/f94b91c0-57aa-472c-8482-669e878fb266/Meteor.svg?v=1719339963690"
                 />
 
-                <div class="flex flex-grow flex-col">
+                <div class="flex flex-grow flex-col gap-3">
                   <!-- Team name -->
                   <h1
                     id="team_name"
                     class="font-semibold text-3xl text-slate-800 h-1/2 w-full"
                   >
-                    [Name goes here]
+                    team_name 
                   </h1>
+                  <span id="team_country" class="fi fi-us h-fill w-fill"></span>
                 </div>
+              </div>
+            </div>
+            <div class="flex flex-col w-full h-1/2 bg-slate-800/25 rounded p-6">
+              
+              </div>
+            </div>
+            <div class="flex flex-col w-1/2 h-full">
+              <div class="flex flex-col w-full h-full bg-slate-800/25 rounded p-6">
+              
               </div>
             </div>
           </div>
