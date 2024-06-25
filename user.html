@@ -244,7 +244,8 @@
             <script>
               // Utility functions
               function ordinal(num) {
-                num = String(num).charAt(num.length - 1);
+                num = num.toString();
+                num = num.charAt(num.length-1);
                 if (num == "1") {
                   return "st";
                 } else if (num == "2") {
@@ -255,8 +256,15 @@
                   return "th";
                 }
               }
+              function correctHour(num) {
+                if (!(num%12)) {
+                  return 12;
+                } else {
+                  return num%12;
+                }
+              }
               function isAM(num) {
-                if (num > 12) {
+                if (num >= 12) {
                   return "pm";
                 } else {
                   return "am";
@@ -292,7 +300,7 @@
                   months[date.getMonth()]
                 } ${date.getDate()}${ordinal(
                   date.getDate()
-                )}, ${date.getHours()}:${padNumber(
+                )}, ${correctHour(date.getHours())}:${padNumber(
                   date.getMinutes()
                 )}:${padNumber(date.getSeconds())}${isAM(date.getHours())}`;
               }
