@@ -37,11 +37,11 @@ app.get("/api/team/:id", async (req, res) => {
     var connections = $(".span10").children("div").eq(1).children("p");
     for (var i = 0; i < connections.length;i++) {
       var connection = {};
-      connection.title = connections.eq(i).find("strong").text();
+      connection.title = connections.eq(i).find("strong").text().toLowerCase();
       connection.url = connections.eq(i).find("a").attr("href");
       data.connections.push(connection);
     }
-    data.connections.push({title: "CTFtime",url: url});
+    data.connections.push({title: "website",url: url});
 
     // Yearly stuff
     var years = $(".nav-tabs").eq(0).children("li");
