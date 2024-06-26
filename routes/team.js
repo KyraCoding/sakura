@@ -11,7 +11,7 @@
  *         id:
  *           type: integer
  *           description: The CTFtime id of the team
- *         team_name:
+ *         name:
  *           type: string
  *           description: The name of the CTFtime team
  *         pfp:
@@ -20,6 +20,20 @@
  *         country:
  *           type: string
  *           description: The nationality of the CTFtime team, abbreviated as a country code
+ *         connections:
+ *           type: array
+ *           description: An object array of connections (websites, github, etc...) of the CTFtime team
+ *           properties:
+ *              connection:
+ *                type: object
+ *                description: An object containing information about a specific connection
+ *                properties:
+ *                  title:
+ *                    type: string
+ *                    description: The type of connection (website, twitter, etc...)
+ *                  url:
+ *                    type: string
+ *                    description: The url of the connection
  *         current_members:
  *           type: array
  *           description: An object array of the current teammembers of the CTFtime team

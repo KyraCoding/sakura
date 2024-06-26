@@ -24,7 +24,7 @@ app.get("/api/team/:id", async (req, res) => {
 
     // General stuff
     data.id = id;
-    data.team_name = $("h2").text().substring(1);
+    data.name = $("h2").text().substring(1);
     data.pfp = $(".span2 > img").attr("src");
     data.country = $(".page-header")
       .find("img")
@@ -33,6 +33,15 @@ app.get("/api/team/:id", async (req, res) => {
         $(".page-header").find("img").attr("src").indexOf("/f/") + 3,
         $(".page-header").find("img").attr("src").indexOf(".png")
       );
+    data.connections = [];
+    var connections = $(".span10").children("div").eq(1).children("p");
+    for (var i = 0; i < connections.length;i++) {
+      var connection = {};
+      connection.title = connections.eq(i).find("strong").text();
+      connection.url = connections.eq(i).find("a").attr("href");
+      data.connections.push(connection);
+    }
+    data.connections.push({title: "CTFtime",url: url});
 
     // Yearly stuff
     var years = $(".nav-tabs").eq(0).children("li");
