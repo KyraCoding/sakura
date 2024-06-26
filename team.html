@@ -9,6 +9,7 @@
     <script src="https://cdn.tailwindcss.com?plugins=aspect-ratio"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link
       href="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap"
       rel="stylesheet"
@@ -438,6 +439,14 @@
                     />
                   </div>
                 </div>
+                <!-- Connections -->
+                <div class="grid grid-cols-5 h-1/2 w-full gap-3">
+                  <i id="connection_0" class="bi bi-globe-americas aspect_square w-fill"></i>
+                  <i id="connection_1" class="bi bi-globe-americas aspect_square w-fill"></i>
+                  <i  id="connection_2" class="bi bi-globe-americas aspect_square w-fill"></i>
+                  <i id="connection_3" class="bi bi-globe-americas aspect_square w-fill"></i>
+                  <i id="connection_4" class="bi bi-globe-americas aspect_square w-fill"></i>
+                </div>
               </div>
               <div
                 class="flex flex-col w-full h-1/2 bg-slate-800/25 rounded p-6"
@@ -467,18 +476,19 @@
             document.getElementById("loading_id").classList.add("hidden");
             document.getElementById("invalid_id").classList.remove("hidden");
           } else if (response.status == 200) {
-            
-            // Valid! 
+            // Valid!
             const team = await response.json();
             console.log(team);
             document.getElementById("loading_id").classList.add("hidden");
             document.getElementById("valid_id").classList.remove("hidden");
-            
+
             document.getElementById("team_name").innerHTML = team.name;
-            document.getElementById("team_pfp").src = "https://ctftime.org/"+team.pfp;
-            document.getElementById("team_country").src = "https://flagcdn.com/"+team.country+".svg"
-            
-            document.getEleme
+            document.getElementById("team_pfp").src =
+              "https://ctftime.org/" + team.pfp;
+            document.getElementById("team_country").src =
+              "https://flagcdn.com/" + team.country + ".svg";
+
+            document.getEleme;
           } else {
             document.getElementById("loading_id").classList.add("hidden");
             document.getElementById("error_id").classList.remove("hidden");
