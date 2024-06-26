@@ -24,7 +24,7 @@
         },
       };
     </script>
-    <title>Sakura: CTFtime Analytics and Tools!</title>
+    <title id="title">Sakura: CTFtime Analytics and Tools!</title>
     <link
       rel="icon"
       type="image/x-icon"
@@ -440,9 +440,9 @@
                 </div>
                 <!-- Connections -->
                 <div
-                  class="flex flex-row overflow-x-auto h-1/2 w-full gap-3 items-center mt-6" id="team_connections"
-                >
-                </div>
+                  class="flex flex-row overflow-x-auto h-1/2 w-full gap-3 items-center mt-6"
+                  id="team_connections"
+                ></div>
               </div>
               <div
                 class="flex flex-col w-full h-1/2 bg-slate-800/25 rounded p-6"
@@ -521,27 +521,29 @@
             document.getElementById("loading_id").classList.add("hidden");
             document.getElementById("valid_id").classList.remove("hidden");
 
+            document.getElementById("title").innerHTML = "Sakura / "+team.name;
             document.getElementById("team_name").innerHTML = team.name;
             document.getElementById("team_pfp").src =
               "https://ctftime.org/" + team.pfp;
-            document.getElementById("team_country").src =
-              "https://flagcdn.com/" + team.country + ".svg";
+            if (team.country) {
+              document.getElementById("team_country").src =
+                "https://flagcdn.com/" + team.country + ".svg";
+            } else {
+              document.getElementById("team_country").classList.add("hidden");
+            }
 
             team.connections.forEach((connection) => {
-              console.log(connection)
+              console.log(connection);
               const connections = document.getElementById("team_connections");
-              var connection_div = document.createElement("div");
-              var connection_svg = document.createElement("svg");
-              connection_svg.innerHTML = connection_icons[connection.title];
-              console.log(connection_svg)
-              connection_svg.src = connection.url;
-              connection_svg.classList = "w-full h-full"
-              connection_div.classList = "flex aspect-square h-2/3 bg-slate-800/25 rounded";
-              connection_div.appendChild(connection_svg);
-              connections.appendChild(connection_div)
-              
+              var connection_div = document.createElement("a");
+              connection_div.innerHTML = connection_icons[connection.title];
+              var connection_svg = connection_div.firstChild;
+              connection_svg.classList = "w-full h-full ";
+              connection_div.classList =
+                "flex aspect-square h-2/3 bg-slate-800/25 rounded p-3";
+              connection_div.href = connection.url;
+              connections.appendChild(connection_div);
             });
-
           } else {
             document.getElementById("loading_id").classList.add("hidden");
             document.getElementById("error_id").classList.remove("hidden");
