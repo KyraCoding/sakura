@@ -13,7 +13,7 @@ app.get("/api/team/:id", async (req, res) => {
 
   // http status
   const data = {};
-  res.status(response.status)
+  res.status(response.status);
   if (response.status != 200) {
     data.failed = true;
   } else {
@@ -24,24 +24,37 @@ app.get("/api/team/:id", async (req, res) => {
 
     // General stuff
     data.id = id;
-    data.name = $("h2").text().substring(1);
+    data.name = $("h2").text().substring().trim();
     data.pfp = $(".span2 > img").attr("src");
-    data.country = $(".page-header")
-      .find("img")
-      .attr("src")
-      .substring(
-        $(".page-header").find("img").attr("src").indexOf("/f/") + 3,
-        $(".page-header").find("img").attr("src").indexOf(".png")
+    const imgElement = $(".page-header").find("img");
+
+    if (imgElement.length === 0) {
+      data.country = "";
+    } else {
+      const imgSrc = imgElement.attr("src");
+      data.country = imgSrc.substring(
+        imgSrc.indexOf("/f/") + 3,
+        imgSrc.indexOf(".png")
       );
+    }
+
     data.connections = [];
     var connections = $(".span10").children("div").eq(1).children("p");
-    for (var i = 0; i < connections.length;i++) {
+    for (var i = 0; i < connections.length; i++) {
       var connection = {};
-      connection.title = connections.eq(i).find("strong").text().toLowerCase();
-      connection.url = connections.eq(i).find("a").attr("href");
+      var breakpoint = connections.eq(i).text().indexOf(":");
+      connection.title = connections
+        .eq(i)
+        .text()
+        .substring(0, breakpoint)
+        .toLowerCase();
+      connection.url = connections
+        .eq(i)
+        .text()
+        .substring(breakpoint + 2);
       data.connections.push(connection);
     }
-    data.connections.push({title: "website",url: url});
+    data.connections.push({ title: "website", url: url });
 
     // Yearly stuff
     var years = $(".nav-tabs").eq(0).children("li");
