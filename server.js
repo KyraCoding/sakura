@@ -57,11 +57,14 @@ app.get("/api/team/:id", async (req, res) => {
     data.connections.push({ title: "website", url: url });
 
     // Yearly stuff
+    data.years = []
+    
     var years = $(".nav-tabs").eq(0).children("li");
     for (var index = 0; index < years.length; index++) {
       data[years.eq(index).find("a").text()] = {};
       var this_year = data[years.eq(index).find("a").text()];
       this_year.year = years.eq(index).find("a").text();
+      data.years.push(this_year.year);
 
       // Global stuff
       var year_div = $("#rating_" + this_year.year);
