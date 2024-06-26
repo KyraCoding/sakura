@@ -20,6 +20,9 @@
  *         country:
  *           type: string
  *           description: The nationality of the CTFtime team, abbreviated as a country code
+ *         years:
+ *           type: array
+ *           description: An integer array of the years the CTFteam has participated in
  *         connections:
  *           type: array
  *           description: An object array of connections (websites, github, etc...) of the CTFtime team
