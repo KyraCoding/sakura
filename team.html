@@ -453,22 +453,36 @@
               >
                 <!-- Select present or former members -->
                 <div
-                  class="flex flex-row self-center w-3/4 h-1/6 border rounded" data-toggle="present"
+                  class="flex flex-row self-center w-3/4 h-1/6 border rounded" data-active="present" data-deactive="former"
                 >
                   <!-- Present, default highlight -->
                   <div
-                    id="team_current_toggle" class="flex w-1/2 bg-slate-800/25 border-r justify-center items-center hover:bg-slate-800/40 cursor-pointer transition ease-in-out duration-300"
+                    id="team_current_toggle" class="flex w-1/2 bg-slate-800/15 border-r justify-center items-center hover:bg-slate-800/30 cursor-pointer transition ease-in-out duration-300"
                   >
                     <h1 class="">Current</h1>
                   </div>
 
                   <!-- Former -->
                   <div
-                    id="team_former_toggle" class="flex w-1/2 border-r justify-center items-center hover:bg-slate-800/40 cursor-pointer transition ease-in-out duration-300"
+                    id="team_former_toggle" class="flex w-1/2 border-r justify-center items-center hover:bg-slate-800/30 cursor-pointer transition ease-in-out duration-300"
                   >
                     <h1 class="">Former</h1>
                   </div>
                 </div>
+                
+                
+                <div class="flex w-full h-full bg-slate-800/15 rounded p-3 mt-3">
+                  <!-- Present members -->
+                  <div  class="flex overflow-auto flex-wrap w-full h-fit gap-2 justify-start items-start" id="team_current_div">
+                    
+                  </div>
+                  <!-- Former members -->
+                  <div  class="flex overflow-auto flex-wrap w-full h-fit gap-2 justify-start items-start hidden" id="team_former_div">
+                    
+                  </div>
+                </div> 
+                
+                
               </div>
 
               <!-- Bottom left -->
@@ -578,10 +592,27 @@
               var connection_svg = connection_div.firstChild;
               connection_svg.classList = "w-full h-full fill-slate-800";
               connection_div.classList =
-                "flex aspect-square h-2/3 bg-slate-800/25 rounded p-3 hover:bg-slate-800/50 transition ease-in-out duration-300";
+                "flex aspect-square h-2/3 bg-slate-800/15 rounded p-3 hover:bg-slate-800/30 transition ease-in-out duration-300";
               connection_div.href = connection.url;
               connections.appendChild(connection_div);
             });
+            
+            team.current_members.forEach((member) => {
+              var parent = document.getElementById("team_current_div");
+              var member_div = document.createElement("a")
+              member_div.className = "flex h-min w-fit bg-slate-800/25 text-slate-800 text-1xl p-1 font-medium rounded  hover:bg-slate-800/30 cursor-pointer transition ease-in-out duration-300"
+              member_div.textContent = member.name
+              member_div.href = "https://ctftime.org/user/"+member.id
+              parent.appendChild(member_div)
+            })
+            team.former_members.forEach((member) => {
+              var parent = document.getElementById("team_former_div");
+              var member_div = document.createElement("a")
+              member_div.className = "flex h-min w-fit bg-slate-800/25 text-slate-800 text-1xl p-1 font-medium rounded  hover:bg-slate-800/30 cursor-pointer transition ease-in-out duration-300"
+              member_div.textContent = member.name
+              member_div.href = "https://ctftime.org/user/"+member.id
+              parent.appendChild(member_div)
+            })
           } else {
             document.getElementById("loading_id").classList.add("hidden");
             document.getElementById("error_id").classList.remove("hidden");
@@ -589,6 +620,25 @@
         }
         getData();
       }
+      
+      document.getElementById("team_current_toggle").addEventListener("click", function() {
+        
+          var temp = this.className;
+          this.className = document.getElementById("team_former_toggle").className
+          document.getElementById("team_former_toggle").className = temp
+          document.getElementById("team_current_div").classList.remove("hidden")
+          document.getElementById("team_former_div").classList.add("hidden")
+        
+      })
+      document.getElementById("team_former_toggle").addEventListener("click", function() {
+          var temp = this.className;
+          this.className = document.getElementById("team_former_toggle").className
+          document.getElementById("team_former_toggle").className = temp
+          document.getElementById("team_former_div").classList.remove("hidden")
+          document.getElementById("team_current_div").classList.add("hidden")
+        
+      })
+      
     </script>
   </body>
 </html>
