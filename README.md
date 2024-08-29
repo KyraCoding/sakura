@@ -1,5 +1,5 @@
 # Sakura
-
+![image of sakura homepage](https://i.ibb.co/4NhHxBf/image.png)
 ## What is Sakura?
 Ever used one of those ".gg" websites for a videogame? Think tracker.gg, for example. Sakura aims to be that type of website, but for CTFtime.
 The CTFtime website is great, sure, but also leaves much to be desired. For example, there is no way to see what 10 competitions are currently making up your rating score. 
